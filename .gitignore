@@ -1,0 +1,7 @@
+PeterMonoFonts/
+*.otf
+
+forge/
+*.sfd
+
+*.zip
