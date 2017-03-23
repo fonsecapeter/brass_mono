@@ -16,16 +16,16 @@ while ( i<$argc )
     # add space and nbspace glyphs
     # and make them worth selecting
     Select(0x20, 0xA0);
-    SetWidth(450);
+    SetWidth(560);
 
     # select all relevant glyphs and make them
-    # the right size in the right placei
+    # the right size in the right place
     # monospacing to 450
     SelectWorthOutputting();
-    ScaleToEm(700, 200);
+    ScaleToEm(933, 267);
     Scale(120);
-    Transform(100, 0, 0, 100, 5000, -27500);
-    SetWidth(450);
+    Transform(100, 0, 0, 100, 4500, -27500);
+    SetWidth(560);
 
     # Set font info
     SetFontNames("PeterCozy", "Peter Mono Cozy", "Peter Mono Cozy Regular", "Regular");
@@ -39,8 +39,8 @@ while ( i<$argc )
 
     # make non-cozy version
     SelectWorthOutputting();
-    SetWidth(490);
-    Transform(100, 0, 0, 100, 2000, 0);
+    SetWidth(585);
+    Transform(100, 0, 0, 100, 2500, 0);
     SetFontNames("Peter", "Peter Mono", "Peter Mono Regular", "Regular");
 
     outfile=file_name:r + ".sfd";
@@ -49,8 +49,8 @@ while ( i<$argc )
 
     # make comfortable version
     SelectWorthOutputting();
-    SetWidth(530);
-    Transform(100, 0, 0, 100, 2000, 0);
+    SetWidth(635);
+    Transform(100, 0, 0, 100, 2500, 0);
     SetFontNames("PeterComfortable", "Peter Mono Comfortable", "Peter Mono Comfortable Regular", "Regular");
 
     outfile=file_name:r + "_comfortable.sfd";
