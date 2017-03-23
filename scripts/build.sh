@@ -1,14 +1,14 @@
 # run from root dir
 
 echo
-./delete_output.sh
+./scripts/clean.sh
 
-echo "building Peter Mono Regular..."
+echo "forging Peter Mono Regular..."
 echo
-./build.pe regular.svg
+./scripts/forge.pe regular.svg
 
 tput setaf 2
-echo "fonts built:"
+echo "fonts forged:"
 tput bold
 tree PeterMonoFonts
 tput sgr0
