@@ -10,12 +10,12 @@ echo
 tput setaf 2
 echo "fonts forged:"
 tput bold
-tree PeterMonoFonts
+tree PeterMono
 tput sgr0
 echo
 
 echo "compressing fonts..."
-zip -r PeterMono.zip PeterMonoFonts
+zip -r PeterMono.zip PeterMono
 tput setaf 2
 echo "fonts compressed in PeterMono.zip"
 echo

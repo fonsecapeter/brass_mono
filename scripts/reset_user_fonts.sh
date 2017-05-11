@@ -1,5 +1,5 @@
 echo
-echo "uninstalling user PeterMonoFonts"
+echo "uninstalling user PeterMono"
 removed=$(rm -rfv ~/.fonts/PeterMonoFonts/)
 tput setaf 2
 echo "deleted:"
@@ -9,7 +9,7 @@ tput sgr0
 
 tput setaf 2
 echo "installing PeterMonoFonts"
-cp -r PeterMonoFonts/ ~/.fonts
+cp -r PeterMono/ ~/.fonts
 tput bold
 tree ~/.fonts
 tput sgr0

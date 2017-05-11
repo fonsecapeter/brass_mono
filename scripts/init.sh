@@ -1,4 +1,4 @@
-mkdir PeterMonoFonts
+mkdir PeterMono
 sudo apt install inkscape fontforge
 # Inkscape 0.91 r13725
 #

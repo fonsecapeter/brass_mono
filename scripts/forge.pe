@@ -1,4 +1,4 @@
-#! /usr/local/bin/fontforge
+#! /usr/bin/fontforge
 # takes multiple svg's, positions and scales glyphs, outputs sfd and otf for each
 i = 1
 while ( i<$argc )
@@ -35,7 +35,7 @@ while ( i<$argc )
     Save("forge/" + outfile);
 
     # generate open type font
-    Generate("PeterMonoFonts/" + outfile:r + ".otf");
+    Generate("PeterMono/" + outfile:r + ".otf");
 
     # make non-cozy version
     SelectWorthOutputting();
@@ -45,7 +45,7 @@ while ( i<$argc )
 
     outfile=file_name:r + ".sfd";
     Save("forge/" + outfile);
-    Generate("PeterMonoFonts/" + outfile:r + ".otf");
+    Generate("PeterMono/" + outfile:r + ".otf");
 
     # make comfortable version
     SelectWorthOutputting();
@@ -55,7 +55,7 @@ while ( i<$argc )
 
     outfile=file_name:r + "_comfortable.sfd";
     Save("forge/" + outfile);
-    Generate("PeterMonoFonts/" + outfile:r + ".otf");
+    Generate("PeterMono/" + outfile:r + ".otf");
 
     i = i+1
 endloop
