@@ -1,8 +1,10 @@
 # Peter Mono
 
+Get the zipped otf's [here](https://github.com/fonsecapeter/peter_mono/releases/latest/)
+
 ![letters](/media/letters.png "letters.png")
 
-#### Development
+### Development
 from the root dir,
   * first run `make init` to set up the dependencies
   * edit the svg font and save
