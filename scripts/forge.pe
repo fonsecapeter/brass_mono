@@ -1,4 +1,4 @@
-#! /usr/bin/fontforge
+#! /usr/local/bin/env fontforge
 # takes multiple svg's, positions and scales glyphs, outputs sfd and otf for each
 i = 1
 while ( i<$argc )
