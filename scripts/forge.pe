@@ -1,4 +1,4 @@
-#! /usr/local/bin/env fontforge
+#! /usr/bin/env fontforge
 # takes multiple svg's, positions and scales glyphs, outputs sfd and otf for each
 i = 1
 while ( i<$argc )
@@ -28,34 +28,34 @@ while ( i<$argc )
     SetWidth(560);
 
     # Set font info
-    SetFontNames("PeterCozy", "Peter Mono Cozy", "Peter Mono Cozy Regular", "Regular");
+    SetFontNames("BrassCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
 
     # save sfd
     outfile=file_name:r + "_cozy.sfd";
     Save("forge/" + outfile);
 
     # generate open type font
-    Generate("PeterMono/" + outfile:r + ".otf");
+    Generate("BrassMono/" + outfile:r + ".otf");
 
     # make non-cozy version
     SelectWorthOutputting();
     SetWidth(590);
     Transform(100, 0, 0, 100, 3000, 0);
-    SetFontNames("Peter", "Peter Mono", "Peter Mono Regular", "Regular");
+    SetFontNames("Brass", "Brass Mono", "Brass Mono Regular", "Regular");
 
     outfile=file_name:r + ".sfd";
     Save("forge/" + outfile);
-    Generate("PeterMono/" + outfile:r + ".otf");
+    Generate("BrassMono/" + outfile:r + ".otf");
 
     # make comfortable version
     SelectWorthOutputting();
     SetWidth(650);
     Transform(100, 0, 0, 100, 3000, 0);
-    SetFontNames("PeterComfortable", "Peter Mono Comfortable", "Peter Mono Comfortable Regular", "Regular");
+    SetFontNames("BrassComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
 
     outfile=file_name:r + "_comfortable.sfd";
     Save("forge/" + outfile);
-    Generate("PeterMono/" + outfile:r + ".otf");
+    Generate("BrassMono/" + outfile:r + ".otf");
 
     i = i+1
 endloop

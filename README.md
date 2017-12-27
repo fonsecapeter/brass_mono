@@ -1,6 +1,6 @@
-# Peter Mono
+# Brass Mono
 
-Get the zipped otf's [here](https://github.com/fonsecapeter/peter_mono/releases/latest/)
+Get the zipped otf's [here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
 ![letters](/media/letters.png "letters.png")
 
@@ -9,6 +9,6 @@ from the root dir,
   * first run `make init` to set up the dependencies
   * edit the svg font and save
   * run `make build` to build and zip the fonts with fontforge
-  * run `make install` to install the fonts to your user account (will update if already installed in ~/.fonts/PeterMonoFonts)
+  * run `make install` to install the fonts to your user account (will update if already installed in ~/.fonts/BrassMonoFonts)
 
 > fontforge docs: https://fontforge.github.io/scripting.html

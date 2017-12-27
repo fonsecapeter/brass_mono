@@ -1,4 +1,4 @@
-mkdir PeterMono
+mkdir BrassMono
 sudo apt install inkscape fontforge
 # Inkscape 0.91 r13725
 #

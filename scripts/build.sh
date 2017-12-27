@@ -3,20 +3,20 @@
 echo
 ./scripts/clean.sh
 
-echo "forging Peter Mono Regular..."
+echo "forging Brass Mono Regular..."
 echo
 ./scripts/forge.pe regular.svg
 
 tput setaf 2
 echo "fonts forged:"
 tput bold
-tree PeterMono
+tree BrassMono
 tput sgr0
 echo
 
 echo "compressing fonts..."
-zip -r PeterMono.zip PeterMono
+zip -r BrassMono.zip BrassMono
 tput setaf 2
-echo "fonts compressed in PeterMono.zip"
+echo "fonts compressed in BrassMono.zip"
 echo
 tput sgr0

@@ -9,7 +9,7 @@ echo $sfds
 tput sgr0
 
 echo "removing otfs"
-otfs=$(rm -v PeterMono/*.otf 2>&1)
+otfs=$(rm -v BrassMono/*.otf 2>&1)
 tput setaf 2
 echo "deleted:"
 tput bold
