@@ -1,6 +1,6 @@
 # Brass Mono
 
-Get the zipped otf's [here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
+[Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
 ![brass_mono](/media/brass_mono.png "brass_mono.png")
 
