@@ -2,7 +2,7 @@
 
 Get the zipped otf's [here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
-![letters](/media/letters.png "letters.png")
+![brass_mono](/media/brass_mono.png "brass_mono.png")
 
 ### Development
 from the root dir,
