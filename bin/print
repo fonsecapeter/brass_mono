@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e -o pipefail
+
+if [[ "${1}" != *'-first' ]]; then
+  printf '\n'
+fi
+
+if [[ "${1}" == 'start'* ]]; then
+  tput setaf 1
+  printf ' > '
+  tput setaf 2
+  printf "${2}"
+  tput setaf 8
+  printf '...\n'
+  tput sgr0
+elif [[ "${1}"  == 'end'* ]]; then
+  tput setaf 1
+  printf '=> '
+  tput setaf 2
+  printf "${2}"
+  if [ "${1}" == 'end:' ]; then
+    tput setaf 8
+    printf ':\n'
+  else
+    printf '\n'
+  fi
+  tput sgr0
+fi

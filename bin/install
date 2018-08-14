@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+# Install fonts (linux)
+set -e -o pipefail
+
 echo
 echo "uninstalling user BrassMono"
 removed=$(rm -rfv ~/.fonts/BrassMonoFonts/)

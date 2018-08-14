@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Tag for release
+# usage: bin/tag [patch | minor | major]
+#   - defaults to patch
+set -e -o pipefail
+
+function get_latest_tag() {
+  local -r version=$( \
+    git describe --abbrev=0 --tags \
+      | sed 's/v//' \
+  )
+  echo "${version:-'0.0.0'}"
+}
+
+function needs_tag() {
+  [ git describe --contains "$(git rev-parse HEAD)" ]
+}
+
+function main() {
+  local version=$(get_latest_tag)
+  local major="${version%%.*}"; version="${version#*.}"
+  local minor="${version%%.*}"; version="${version#*.}"
+  local patch="${version%%.*}"; version="${version#*.}"
+
+  # Incement
+  if [ "${1}" == 'major' ]; then
+    major=$((major+1))
+  elif [ "${1}" == 'minor' ]; then
+    minor=$((minor+1))
+  else
+    patch=$((patch+1))
+  fi
+
+  # Create new tag
+  if [ -z "$needs_tag" ]; then
+    local -r new_version="$major.$minor.$patch"
+    bin/print end-first "Updating to v${new_version}"
+
+    git tag -a "v${new_version}" -m "Version ${new_version}" $@
+    git push origin "v${version}"
+  else
+    bin/print end-first "Already a tag on this commit"
+  fi
+}
+
+main

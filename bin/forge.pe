@@ -1,5 +1,9 @@
 #! /usr/bin/env fontforge
-# takes multiple svg's, positions and scales glyphs, outputs sfd and otf for each
+# no help
+# usage: bin/forge.pe some.svg [other.svgs]
+#   - positions and scales glyphs
+#   - outputs sfd and otf for each
+
 i = 1
 while ( i<$argc )
     file_name = $argv[i]

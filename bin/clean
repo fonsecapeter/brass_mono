@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Clean up generated files
+set -e -o pipefail
+
+bin/print start-first 'Removing sfds'
+rm -v forge/*.sfd || true
+
+bin/print start 'Removing otfs'
+rm -v BrassMono/*.otf || true
+
+rm -v BrassMono.zip || true
+bin/print end 'Squeeky clean :D'

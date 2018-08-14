@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# List all commands
+set -e -o pipefail
+
+for file in bin/*; do
+  name=$( \
+    echo $file \
+    | sed 's@bin\/@@g' \
+  )
+  description=$( \
+    cat "$file" | \
+    head -n 2 | \
+    tail -n 1 | \
+    sed 's/# //'\
+  )
+  if [[ "${description}" == 'no help' ]]; then
+    continue
+  fi
+  printf \
+    "  $(tput setaf 2)%.16s$(tput sgr0)%s\n" \
+    "${name}$(tput setaf 8)...................." \
+    "${description}"
+done
