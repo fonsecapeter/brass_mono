@@ -1,5 +1,7 @@
 # Brass Mono
 
+[![Build Status](https://travis-ci.org/fonsecapeter/brass_mono.svg?branch=master)](https://travis-ci.org/fonsecapeter/brass_mono.svg)
+
 [Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
 ![brass_mono](/media/brass_mono.png 'brass_mono.png')
