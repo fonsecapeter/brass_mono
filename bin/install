@@ -2,19 +2,16 @@
 # Install fonts (linux)
 set -e -o pipefail
 
-echo
-echo "uninstalling user BrassMono"
-removed=$(rm -rfv ~/.fonts/BrassMonoFonts/)
-tput setaf 2
-echo "deleted:"
-tput bold
-echo $removed
-tput sgr0
+readonly user_font_dir=~/.fonts
 
-tput setaf 2
-echo "installing BrassMonoFonts"
-cp -r BrassMono/ ~/.fonts
-tput bold
+mkdir -p "${user_font_dir}/BrassMono"
+bin/uninstall
+
+if [ "${1}" == ttf ]; then
+  cp BrassMono/TrueType/*.ttf "${user_font_dir}/BrassMono"
+else
+  cp BrassMono/OpenType/*.otf "${user_font_dir}/BrassMono"
+fi
+
+bin/print end 'Installed fonts'
 tree ~/.fonts
-tput sgr0
-echo

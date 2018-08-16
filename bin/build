@@ -14,5 +14,5 @@ bin/print start 'Compressing fonts'
 tput sgr0
 
 cp LICENSE.txt OFL-FAQ.txt BrassMono
-zip -r BrassMono.zip BrassMono
+zip -x *.gitkeep -r BrassMono.zip BrassMono
 bin/print end 'Compressed in BrassMono.zip'

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Uninstall fonts (linux)
+set -e -o pipefail
+
+readonly user_font_dir=~/.fonts
+
+bin/print start-first 'Uninstalling from user fonts'
+rm -v "${user_font_dir}/BrassMono/"* || true
+
