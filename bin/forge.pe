@@ -6,60 +6,62 @@
 
 i = 1
 while ( i<$argc )
-    file_name = $argv[i]
-    if ( file_name:e != "svg" )
-        Error(file_name + " is not an svg")
-    endif
+  file_name = $argv[i]
+  if ( file_name:e != "svg" )
+    Error(file_name + " is not an svg")
+  endif
 
-    # open the given svg file
-    Open(file_name);
+  # open the given svg file
+  Open(file_name);
 
-    # set encoding to add glyphs with no paths
-    Reencode("iso8859-1");
+  # set encoding to add glyphs with no paths
+  Reencode("iso8859-1");
 
-    # add space and nbspace glyphs
-    # and make them worth selecting
-    Select(0x20, 0xA0);
-    SetWidth(560);
+  # add space and nbspace glyphs
+  # and make them worth selecting
+  Select(0x20, 0xA0);
+  SetWidth(560);
 
-    # select all relevant glyphs and make them
-    # the right size in the right place
-    # monospacing to 450
-    SelectWorthOutputting();
-    ScaleToEm(933, 267);
-    Scale(120);
-    Transform(100, 0, 0, 100, 4500, -27500);
-    SetWidth(560);
+  # select all relevant glyphs and make them
+  # the right size in the right place
+  SelectWorthOutputting();
+  ScaleToEm(933, 267);
+  Scale(120);
+  Transform(100, 0, 0, 100, 4500, -27500);
+  SetWidth(560);
+  AutoHint();
 
-    # Set font info
-    SetFontNames("BrassCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
+  SetFontNames("BrassCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
 
-    # save sfd
-    outfile=file_name:r + "_cozy.sfd";
-    Save("forge/" + outfile);
+  outfile=file_name:r + "_cozy.sfd";
+  Save("forge/" + outfile);
 
-    # generate open type font
-    Generate("BrassMono/" + outfile:r + ".otf");
+  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
+  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
 
-    # make non-cozy version
-    SelectWorthOutputting();
-    SetWidth(590);
-    Transform(100, 0, 0, 100, 3000, 0);
-    SetFontNames("Brass", "Brass Mono", "Brass Mono Regular", "Regular");
+  # make non-cozy version
+  SelectWorthOutputting();
+  SetWidth(590);
+  Transform(100, 0, 0, 100, 3000, 0);
+  AutoHint();
+  SetFontNames("Brass", "Brass Mono", "Brass Mono Regular", "Regular");
 
-    outfile=file_name:r + ".sfd";
-    Save("forge/" + outfile);
-    Generate("BrassMono/" + outfile:r + ".otf");
+  outfile=file_name:r + ".sfd";
+  Save("forge/" + outfile);
+  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
+  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
 
-    # make comfortable version
-    SelectWorthOutputting();
-    SetWidth(650);
-    Transform(100, 0, 0, 100, 3000, 0);
-    SetFontNames("BrassComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
+  # make comfortable version
+  SelectWorthOutputting();
+  SetWidth(650);
+  Transform(100, 0, 0, 100, 3000, 0);
+  AutoHint();
+  SetFontNames("BrassComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
 
-    outfile=file_name:r + "_comfortable.sfd";
-    Save("forge/" + outfile);
-    Generate("BrassMono/" + outfile:r + ".otf");
+  outfile=file_name:r + "_comfortable.sfd";
+  Save("forge/" + outfile);
+  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
+  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
 
-    i = i+1
+  i = i+1
 endloop
