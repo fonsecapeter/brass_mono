@@ -1,67 +1,81 @@
 #! /usr/bin/env fontforge
 # no help
-# usage: bin/forge.pe some.svg [other.svgs]
+# usage: bin/forge.pe
 #   - positions and scales glyphs
-#   - outputs sfd and otf for each
+#   - generates cozy, standard, and comfortable spacing
+#   - generates bold weights
+#   - outputs sfd, otfs, and ttfs for each
 
-i = 1
-while ( i<$argc )
-  file_name = $argv[i]
-  if ( file_name:e != "svg" )
-    Error(file_name + " is not an svg")
-  endif
+Open("BrassMono.svg");
+# set encoding to add glyphs with no paths
+Reencode("iso8859-1");
+# add space and nbspace glyphs
+# and make them worth selecting
+Select(0x20, 0xA0);
+SetWidth(560);
 
-  # open the given svg file
-  Open(file_name);
+# select all relevant glyphs and make them
+# the right size in the right place
+SelectWorthOutputting();
+ScaleToEm(933, 267);
+Scale(120);
+Transform(100, 0, 0, 100, 4500, -27500);
+SetWidth(560);
+AutoHint();
+SetFontNames("BrassMonoCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
+regular_file="BrassMono-Cozy-Regular.sfd";
+Save("forge/" + regular_file);
+Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
+Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
 
-  # set encoding to add glyphs with no paths
-  Reencode("iso8859-1");
+SetFontNames("BrassMonoCozy", "Brass Mono Cozy", "Brass Mono Cozy Bold", "Bold");
+SetOS2Value("Weight", 700);
+ExpandStroke(30, 1, 1, 0, 2);
+bold_file="BrassMono-Cozy-Bold.sfd";
+Save("forge/" + bold_file);
+Generate("BrassMono/OpenType/" + bold_file:r + ".otf");
+Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
 
-  # add space and nbspace glyphs
-  # and make them worth selecting
-  Select(0x20, 0xA0);
-  SetWidth(560);
+# make non-cozy version
+# ----------------------------------------------------------------------------
+Open("forge/" + regular_file);
+SelectWorthOutputting();
+SetWidth(590);
+Transform(100, 0, 0, 100, 3000, 0);
+AutoHint();
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono Regular", "Regular");
+regular_file="BrassMono-Regular.sfd";
+Save("forge/" + regular_file);
+Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
+Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
 
-  # select all relevant glyphs and make them
-  # the right size in the right place
-  SelectWorthOutputting();
-  ScaleToEm(933, 267);
-  Scale(120);
-  Transform(100, 0, 0, 100, 4500, -27500);
-  SetWidth(560);
-  AutoHint();
+weight="Bold"
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono Bold", "Bold");
+SetOS2Value("Weight", 700);
+ExpandStroke(30, 1, 1, 0, 2);
+bold_file="BrassMono-Bold.sfd";
+Save("forge/" + regular_file);
+Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
+Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
 
-  SetFontNames("BrassCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
 
-  outfile=file_name:r + "_cozy.sfd";
-  Save("forge/" + outfile);
+# make comfortable version
+# ----------------------------------------------------------------------------
+Open("forge/" + regular_file);
+SelectWorthOutputting();
+SetWidth(650);
+Transform(100, 0, 0, 100, 3000, 0);
+AutoHint();
+SetFontNames("BrassMonoComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
+regular_file="BrassMono-Comfortable-Regular.sfd";
+Save("forge/" + regular_file);
+Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
+Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
 
-  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
-  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
-
-  # make non-cozy version
-  SelectWorthOutputting();
-  SetWidth(590);
-  Transform(100, 0, 0, 100, 3000, 0);
-  AutoHint();
-  SetFontNames("Brass", "Brass Mono", "Brass Mono Regular", "Regular");
-
-  outfile=file_name:r + ".sfd";
-  Save("forge/" + outfile);
-  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
-  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
-
-  # make comfortable version
-  SelectWorthOutputting();
-  SetWidth(650);
-  Transform(100, 0, 0, 100, 3000, 0);
-  AutoHint();
-  SetFontNames("BrassComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
-
-  outfile=file_name:r + "_comfortable.sfd";
-  Save("forge/" + outfile);
-  Generate("BrassMono/OpenType/" + outfile:r + ".otf");
-  Generate("BrassMono/TrueType/" + outfile:r + ".ttf");
-
-  i = i+1
-endloop
+SetFontNames("BrassMonoComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Bold", "Bold");
+SetOS2Value("Weight", 700);
+ExpandStroke(30, 1, 1, 0, 2);
+bold_file="BrassMono-Comfortable-Bold.sfd";
+Save("forge/" + regular_file);
+Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
+Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");

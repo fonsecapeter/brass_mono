@@ -5,7 +5,7 @@ set -e -o pipefail
 bin/clean
 
 bin/print start 'Forging fonts'
-bin/forge.pe regular.svg
+bin/forge.pe
 
 bin/print end: 'fonts forged'
 tree BrassMono
