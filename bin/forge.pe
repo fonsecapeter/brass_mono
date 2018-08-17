@@ -54,9 +54,9 @@ SetFontNames("BrassMono", "Brass Mono", "Brass Mono Bold", "Bold");
 SetOS2Value("Weight", 700);
 ExpandStroke(30, 1, 1, 0, 2);
 bold_file="BrassMono-Bold.sfd";
-Save("forge/" + regular_file);
-Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
-Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
+Save("forge/" + bold_file);
+Generate("BrassMono/OpenType/" + bold_file:r + ".otf");
+Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
 
 
 # make comfortable version
@@ -76,6 +76,6 @@ SetFontNames("BrassMonoComfortable", "Brass Mono Comfortable", "Brass Mono Comfo
 SetOS2Value("Weight", 700);
 ExpandStroke(30, 1, 1, 0, 2);
 bold_file="BrassMono-Comfortable-Bold.sfd";
-Save("forge/" + regular_file);
-Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
-Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
+Save("forge/" + bold_file);
+Generate("BrassMono/OpenType/" + bold_file:r + ".otf");
+Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
