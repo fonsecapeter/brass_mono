@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# No help
+set -e -o pipefail
+
+export DOCKER_TAG="${TRAVIS_COMMIT:=local}"
+

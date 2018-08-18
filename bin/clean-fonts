@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# No help
+set -e -o pipefail
+
+bin/print start 'Removing FontForge files'
+rm -vf forge/*.sfd || true
+
+bin/print start 'Removing generated fonts'
+rm -vf BrassMono/OpenType/*.otf || true
+rm -vf BrassMono/TrueType/*.ttf || true
+
+rm -vf BrassMono.zip || true
+bin/print end 'Squeeky clean :D'

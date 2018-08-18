@@ -2,17 +2,5 @@
 # Build fonts from inkscape svg
 set -e -o pipefail
 
-bin/clean
-
-bin/print start 'Forging fonts'
-bin/forge.pe
-
-bin/print end: 'fonts forged'
-tree BrassMono
-
-bin/print start 'Compressing fonts'
-tput sgr0
-
-cp LICENSE.txt OFL-FAQ.txt BrassMono
-zip -x *.gitkeep -r BrassMono.zip BrassMono
-bin/print end 'Compressed in BrassMono.zip'
+source bin/export-docker-tag
+docker-compose run --rm brass-mono

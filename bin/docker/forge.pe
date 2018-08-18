@@ -1,5 +1,4 @@
 #! /usr/bin/env fontforge
-# no help
 # usage: bin/forge.pe
 #   - positions and scales glyphs
 #   - generates cozy, standard, and comfortable spacing
@@ -7,6 +6,10 @@
 #   - outputs sfd, otfs, and ttfs for each
 
 Open("BrassMono.svg");
+SetOS2Value("VendorId", "FNSA");
+SetOS2Value("Weight", 400);
+SetOS2Value("FSType", 0);
+
 # set encoding to add glyphs with no paths
 Reencode("iso8859-1");
 # add space and nbspace glyphs
@@ -17,9 +20,10 @@ SetWidth(560);
 # select all relevant glyphs and make them
 # the right size in the right place
 SelectWorthOutputting();
-ScaleToEm(933, 267);
-Scale(120);
-Transform(100, 0, 0, 100, 4500, -27500);
+ScaleToEm(800, 200);
+Scale(120);  # Should resize inkscape document size to match...
+Transform(100, 0, 0, 100, 0, -32000);  # Move down 320 units
+CenterInWidth();
 SetWidth(560);
 AutoHint();
 SetFontNames("BrassMonoCozy", "Brass Mono Cozy", "Brass Mono Cozy Regular", "Regular");
@@ -41,7 +45,7 @@ Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
 Open("forge/" + regular_file);
 SelectWorthOutputting();
 SetWidth(590);
-Transform(100, 0, 0, 100, 3000, 0);
+CenterInWidth();
 AutoHint();
 SetFontNames("BrassMono", "Brass Mono", "Brass Mono Regular", "Regular");
 regular_file="BrassMono-Regular.sfd";
@@ -64,7 +68,7 @@ Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
 Open("forge/" + regular_file);
 SelectWorthOutputting();
 SetWidth(650);
-Transform(100, 0, 0, 100, 3000, 0);
+CenterInWidth();
 AutoHint();
 SetFontNames("BrassMonoComfortable", "Brass Mono Comfortable", "Brass Mono Comfortable Regular", "Regular");
 regular_file="BrassMono-Comfortable-Regular.sfd";

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# No help
 set -e -o pipefail
 
 if [[ "${1}" != *'-first' ]]; then
