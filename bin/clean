@@ -2,12 +2,9 @@
 # Clean up generated files
 set -e -o pipefail
 
-bin/print start-first 'Removing FontForge files'
-rm -v forge/*.sfd || true
+source bin/export-docker-tag
+bin/print start-first 'Cleaning the docks'
+docker-compose rm --force -v
+docker system prune --force
 
-bin/print start 'Removing generated fonts'
-rm -v BrassMono/OpenType/*.otf || true
-rm -v BrassMono/TrueType/*.ttf || true
-
-rm -v BrassMono.zip || true
-bin/print end 'Squeeky clean :D'
+bin/clean-fonts

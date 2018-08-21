@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  brass-mono:
+    image: brass-mono:${DOCKER_TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app

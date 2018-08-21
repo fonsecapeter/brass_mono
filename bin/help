@@ -3,6 +3,10 @@
 set -e -o pipefail
 
 for file in bin/*; do
+  if [[ -d "${file}" ]]; then
+    continue
+  fi
+
   name=$( \
     echo $file \
     | sed 's@bin\/@@g' \
@@ -13,7 +17,7 @@ for file in bin/*; do
     tail -n 1 | \
     sed 's/# //'\
   )
-  if [[ "${description}" == 'no help' ]]; then
+  if [[ "${description}" == 'No help' ]]; then
     continue
   fi
   printf \

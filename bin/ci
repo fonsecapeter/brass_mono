@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Clean up generated files
+# No help
 set -e -o pipefail
 
-readonly IMG_TAG="brass-mono:${TRAVIS_COMMIT}"
-docker build . -t "${IMG_TAG}"
-docker run -it "${IMG_TAG}"
+source bin/export-docker-tag
+docker build . -t "brass-mono:${DOCKER_TAG}"
+docker run -it "brass-mono:${DOCKER_TAG}"
