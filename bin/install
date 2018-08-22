@@ -7,10 +7,10 @@ readonly user_font_dir=~/.fonts
 mkdir -p "${user_font_dir}/BrassMono"
 bin/uninstall
 
-if [ "${1}" == ttf ]; then
-  cp BrassMono/TrueType/*.ttf "${user_font_dir}/BrassMono"
-else
+if [ "${1}" == otf ]; then
   cp BrassMono/OpenType/*.otf "${user_font_dir}/BrassMono"
+else
+  cp BrassMono/TrueType/*.ttf "${user_font_dir}/BrassMono"
 fi
 
 bin/print end 'Installed fonts'

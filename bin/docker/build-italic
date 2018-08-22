@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Build fonts from inkscape svg
+set -e -o pipefail
+
+bin/print start 'Forging italic fonts'
+bin/docker/forge-italic.pe
