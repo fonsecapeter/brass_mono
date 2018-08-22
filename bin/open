@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Build fonts from inkscape svg
+set -e -o pipefail
+
+bin/build
+bin/install
+if which sensible-browser 2>&1; then
+  sensisble-browser "http://webfont-test.com/"
+else
+  open "http://webfont-test.com/"
+fi

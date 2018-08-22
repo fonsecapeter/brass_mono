@@ -6,19 +6,21 @@ Open("forge/" + regular_file);
 SelectWorthOutputting();
 Skew(13);
 SetItalicAngle(13);
-SetFontNames("BrassMono", "Brass Mono", "Brass Mono RegularItalic", "Regular");
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono Regular Italic", "Regular Italic");
 SetMacStyle("Italic");
 Save("forge/" + regular_file:r + "Italic.sfd");
 Generate("BrassMono/OpenType/" + regular_file:r + "Italic.otf");
 Generate("BrassMono/TrueType/" + regular_file:r + "Italic.ttf");
+Close();
 
 bold_file="BrassMono-Bold.sfd";
 Open("forge/" + bold_file);
 SelectWorthOutputting();
 Skew(13);
 SetItalicAngle(13);
-SetFontNames("BrassMono", "Brass Mono", "Brass Mono BoldItalic", "Bold");
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono Bold Italic", "Bold Italic");
 SetMacStyle("Bold Italic");
 Save("forge/" + bold_file)
 Generate("BrassMono/OpenType/" + bold_file:r + "Italic.otf");
 Generate("BrassMono/TrueType/" + bold_file:r + "Italic.ttf");
+Close();

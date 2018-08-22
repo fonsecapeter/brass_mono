@@ -31,6 +31,7 @@ regular_file="BrassMono-Regular.sfd";
 Save("forge/" + regular_file);
 Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
 Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
+Close();
 
 Open("forge/" + regular_file);
 SelectWorthOutputting();
@@ -42,3 +43,4 @@ Save("forge/" + bold_file);
 Save("forge/" + bold_file:r + "Italic.sfd");
 Generate("BrassMono/OpenType/" + bold_file:r + ".otf");
 Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
+Close();
