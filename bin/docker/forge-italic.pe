@@ -1,0 +1,24 @@
+#! /usr/bin/env fontforge
+#   - Opens italic files and generates ttf + otfs
+
+regular_file="BrassMono-Regular.sfd";
+Open("forge/" + regular_file);
+SelectWorthOutputting();
+Skew(13);
+SetItalicAngle(13);
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono RegularItalic", "Regular");
+SetMacStyle("Italic");
+Save("forge/" + regular_file:r + "Italic.sfd");
+Generate("BrassMono/OpenType/" + regular_file:r + "Italic.otf");
+Generate("BrassMono/TrueType/" + regular_file:r + "Italic.ttf");
+
+bold_file="BrassMono-Bold.sfd";
+Open("forge/" + bold_file);
+SelectWorthOutputting();
+Skew(13);
+SetItalicAngle(13);
+SetFontNames("BrassMono", "Brass Mono", "Brass Mono BoldItalic", "Bold");
+SetMacStyle("Bold Italic");
+Save("forge/" + bold_file)
+Generate("BrassMono/OpenType/" + bold_file:r + "Italic.otf");
+Generate("BrassMono/TrueType/" + bold_file:r + "Italic.ttf");

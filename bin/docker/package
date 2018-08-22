@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Zip generated fonts for release
+set -e -o pipefail
+
+bin/print start 'Compressing fonts'
+
+cp LICENSE.txt OFL-FAQ.txt BrassMono
+zip -x *.gitkeep -r BrassMono.zip BrassMono
+bin/print end 'Compressed in BrassMono.zip'
