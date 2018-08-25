@@ -3,4 +3,4 @@ set -e -o pipefail
 
 fontbakery \
   check-googlefonts \
-  BrassMono/TrueType/*.ttf
+  BrassMono/*.ttf
