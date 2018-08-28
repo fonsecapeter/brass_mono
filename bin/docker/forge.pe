@@ -25,22 +25,30 @@ Scale(120);  # Should resize inkscape document size to match...
 Transform(100, 0, 0, 100, 0, -32000);  # Move down 320 units
 CenterInWidth();
 SetWidth(560);
-AutoHint();
-SetFontNames("BrassMono", "Brass Mono", "Brass Mono Regular", "Regular");
+CorrectDirection();
+RemoveOverlap();
+Simplify();
+AddExtrema();
+RoundToInt();
+SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular");
+Validate();
 regular_file="BrassMono-Regular.sfd";
 Save("forge/" + regular_file);
-Generate("BrassMono/OpenType/" + regular_file:r + ".otf");
-Generate("BrassMono/TrueType/" + regular_file:r + ".ttf");
+Generate("unhinted/" + regular_file:r + ".ttf");
 Close();
 
 Open("forge/" + regular_file);
 SelectWorthOutputting();
-SetFontNames("BrassMono", "Brass Mono", "Brass Mono Bold", "Bold");
+SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold");
 SetOS2Value("Weight", 700);
-ExpandStroke(30, 1, 1, 0, 2);
+ExpandStroke(30, 1, 1, 0, 1);
+RemoveOverlap();
+Simplify();
+AddExtrema();
+RoundToInt();
+Validate();
 bold_file="BrassMono-Bold.sfd";
 Save("forge/" + bold_file);
 Save("forge/" + bold_file:r + "Italic.sfd");
-Generate("BrassMono/OpenType/" + bold_file:r + ".otf");
-Generate("BrassMono/TrueType/" + bold_file:r + ".ttf");
+Generate("unhinted/" + bold_file:r + ".ttf");
 Close();

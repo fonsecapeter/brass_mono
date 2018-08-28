@@ -3,3 +3,4 @@
 *.zip
 .DS_Store
 BrassMono/*
+unhinted/*

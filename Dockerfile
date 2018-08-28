@@ -5,7 +5,7 @@ ENV TERM=xterm
 COPY . /app
 WORKDIR /app
 RUN apt update \
-  && apt install -y fontforge tree zip
+  && apt install -y fontforge tree zip ttfautohint
 
 # FROM python:3.7-slim
 MAINTAINER Peter Fonseca <peter.nfonseca@gmail.com>
