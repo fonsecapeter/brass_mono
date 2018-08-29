@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
-# Build fonts from inkscape svg
+# Add hinting
 set -e -o pipefail
 
 bin/print start 'Hinting fonts'
-source_files=(
-  'BrassMono-RegularItalic'
+declare -ar source_files=(
+  'BrassMono-Italic'
   'BrassMono-Bold'
   'BrassMono-BoldItalic'
 )
 
-ttfautohint \
-  --ttfa-table \
-  unhinted/BrassMono-Regular.ttf \
-  BrassMono/BrassMono-Regular.ttf \
+ttfautohint -I \
+  dist/unhinted/BrassMono-Regular.ttf \
+  dist/BrassMono/BrassMono-Regular.ttf \
 
 for source_file in "${source_files[@]}"; do
-  ttfautohint \
-    --ttfa-table \
-    --reference=BrassMono/BrassMono-Regular.ttf \
-    "unhinted/${source_file}.ttf" \
-    "BrassMono/${source_file}.ttf"
+  ttfautohint -I \
+    --reference=dist/unhinted/BrassMono-Regular.ttf \
+    "dist/unhinted/${source_file}.ttf" \
+    "dist/BrassMono/${source_file}.ttf"
 done

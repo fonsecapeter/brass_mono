@@ -8,4 +8,4 @@ docker-compose rm --force -v
 docker system prune --force
 
 echo
-bin/clean-fonts
+bin/clean-files

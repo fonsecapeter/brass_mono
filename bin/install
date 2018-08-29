@@ -7,7 +7,7 @@ readonly user_font_dir=~/.fonts
 mkdir -p "${user_font_dir}/BrassMono"
 bin/uninstall
 
-cp BrassMono/*.ttf "${user_font_dir}/BrassMono"
+cp dist/BrassMono/*.ttf "${user_font_dir}/BrassMono"
 
 bin/print end 'Installed fonts'
 tree ~/.fonts

@@ -1,8 +1,8 @@
 #! /usr/bin/env fontforge
 #   - Opens italic files and generates ttf + otfs
 
-regular_file="BrassMono-Regular.sfd";
-Open("forge/" + regular_file);
+OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
+Open("dist/forge/BrassMono-Regular.sfd");
 SelectWorthOutputting();
 Skew(13);
 RemoveOverlap();
@@ -10,15 +10,15 @@ Simplify();
 AddExtrema();
 RoundToInt();
 SetItalicAngle(-13);
-SetFontNames("BrassMono-RegularItalic", "Brass Mono", "Brass Mono Regular Italic", "Regular Italic");
-SetMacStyle("Regular Italic");
-Validate();
-Save("forge/" + regular_file:r + "Italic.sfd");
-Generate("unhinted/" + regular_file:r + "Italic.ttf");
+SetFontNames("BrassMono-Italic", "Brass Mono", "Brass Mono Italic", "Italic", OFL_NOTICE);
+SetMacStyle("Italic");
+SetTTFName(0x409, 2, "Italic");
+Save("dist/forge/BrassMono-Italic.sfd");
+Generate("dist/ttx/BrassMono-Italic.ttf");
 Close();
 
 bold_file="BrassMono-Bold.sfd";
-Open("forge/" + bold_file);
+Open("dist/forge/" + bold_file);
 SelectWorthOutputting();
 Skew(13);
 RemoveOverlap();
@@ -26,9 +26,9 @@ Simplify();
 AddExtrema();
 RoundToInt();
 SetItalicAngle(-13);
-SetFontNames("BrassMono-BoldItalic", "Brass Mono", "Brass Mono Bold Italic", "Bold Italic");
+SetFontNames("BrassMono-BoldItalic", "Brass Mono", "Brass Mono Bold Italic", "Bold Italic", OFL_NOTICE);
 SetMacStyle("Bold Italic");
-Validate();
-Save("forge/" + bold_file:r + "Italic.sfd");
-Generate("unhinted/" + bold_file:r + "Italic.ttf");
+SetTTFName(0x409, 2, "Bold Italic");
+Save("dist/forge/" + bold_file:r + "Italic.sfd");
+Generate("dist/ttx/" + bold_file:r + "Italic.ttf");
 Close();

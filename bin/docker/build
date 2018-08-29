@@ -6,9 +6,10 @@ bin/print start 'Forging fonts'
 bin/docker/forge.pe
 
 bin/docker/build-italic
+bin/docker/ttx
 bin/docker/hint
 
 bin/print end: 'Fonts forged'
-tree BrassMono
+tree dist/BrassMono
 
 bin/package

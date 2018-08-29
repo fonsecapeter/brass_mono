@@ -2,6 +2,6 @@
 # Zip generated fonts for release
 set -e -o pipefail
 
-cp LICENSE.txt OFL-FAQ.txt BrassMono
-zip -x *.gitkeep -r BrassMono.zip BrassMono
+cp OFL.txt OFL-FAQ.txt dist/BrassMono
+zip -x *.gitkeep -r dist/BrassMono.zip dist/BrassMono
 bin/print end 'Compressed in BrassMono.zip'
