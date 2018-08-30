@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Update and install git submodules
+set -e -o pipefail
+
+git submodule update --init --recursive
