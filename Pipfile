@@ -7,6 +7,8 @@ name = "pypi"
 
 [packages]
 fontbakery = "*"
+fonttools = "*"
+ninja = "*"
 
 [requires]
 python_version = "3.7"

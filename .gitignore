@@ -1,6 +1,4 @@
-*.otf
-*.sfd
-*.zip
 .DS_Store
-BrassMono/*
-unhinted/*
+.git
+
+dist/*

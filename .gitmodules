@@ -1,0 +1,3 @@
+[submodule "lib/ots"]
+	path = lib/ots
+	url = https://github.com/khaledhosny/ots

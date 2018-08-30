@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Round trip and remove TTFA
+set -e -o pipefail
+
+function add_dsig() {
+  # Add DSIG table to end of ttx file
+  # Args:
+  #  - 1: ttx file to add dsig to
+  head -n -1 "${1}" > "${1}.tmp"
+  echo '  <DSIG>' >> "${1}.tmp"
+  echo '    <tableHeader flag="0x0" numSigs="0" version="1"/>'  >> "${1}.tmp"
+  echo '  </DSIG>' >> "${1}.tmp"
+  echo >> "${1}.tmp"
+  echo '</ttFont>' >> "${1}.tmp"
+  mv "${1}.tmp" "${1}"
+}
+
+bin/print start 'Recompiling fonts through ttx'
+
+ttx -x FFTM dist/ttx/*.ttf
+for ttx_font in dist/ttx/*.ttx; do
+  add_dsig "${ttx_font}"
+  ttx \
+    -o "dist/unhinted/$(basename ${ttx_font%.*}).ttf" \
+    "${ttx_font}"
+done

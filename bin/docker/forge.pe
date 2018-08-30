@@ -5,10 +5,13 @@
 #   - generates bold weights
 #   - outputs sfd, otfs, and ttfs for each
 
-Open("BrassMono.svg");
+OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
+Open("src/BrassMono.svg");
 SetOS2Value("VendorId", "FNSA");
 SetOS2Value("Weight", 400);
 SetOS2Value("FSType", 0);
+SetTTFName(0x409, 14, "http://scripts.sil.org/OFL");
+SetTTFName(0x409, 13, "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL");
 
 # set encoding to add glyphs with no paths
 Reencode("iso8859-1");
@@ -25,30 +28,29 @@ Scale(120);  # Should resize inkscape document size to match...
 Transform(100, 0, 0, 100, 0, -32000);  # Move down 320 units
 CenterInWidth();
 SetWidth(560);
+SetFontOrder(2);
 CorrectDirection();
 RemoveOverlap();
 Simplify();
 AddExtrema();
 RoundToInt();
-SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular");
-Validate();
+SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular", OFL_NOTICE);
 regular_file="BrassMono-Regular.sfd";
-Save("forge/" + regular_file);
-Generate("unhinted/" + regular_file:r + ".ttf");
+Save("dist/forge/" + regular_file);
+Generate("dist/ttx/" + regular_file:r + ".ttf");
 Close();
 
-Open("forge/" + regular_file);
+Open("dist/forge/" + regular_file);
 SelectWorthOutputting();
-SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold");
+SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE);
 SetOS2Value("Weight", 700);
 ExpandStroke(30, 1, 1, 0, 1);
 RemoveOverlap();
 Simplify();
 AddExtrema();
 RoundToInt();
-Validate();
 bold_file="BrassMono-Bold.sfd";
-Save("forge/" + bold_file);
-Save("forge/" + bold_file:r + "Italic.sfd");
-Generate("unhinted/" + bold_file:r + ".ttf");
+Save("dist/forge/" + bold_file);
+Save("dist/forge/" + bold_file:r + "Italic.sfd");
+Generate("dist/ttx/" + bold_file:r + ".ttf");
 Close();

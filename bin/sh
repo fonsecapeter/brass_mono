@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Run shell within docker container
+set -e -o pipefail
+
+source bin/export-docker-tag
+docker-compose run --rm \
+  brass-mono bash

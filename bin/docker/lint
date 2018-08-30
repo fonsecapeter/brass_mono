@@ -3,4 +3,5 @@ set -e -o pipefail
 
 fontbakery \
   check-googlefonts \
-  BrassMono/*.ttf
+  -l FAIL \
+  dist/BrassMono/*.ttf
