@@ -9,6 +9,8 @@ Open("src/BrassMono.svg");
 SetOS2Value("VendorId", "FNSA");
 SetOS2Value("Weight", 400);
 SetOS2Value("FSType", 0);
+SetOS2Value("Panose", [2,0,5,9,0,0,0,0,0,0]);
+# SetIsFixedPitch(1);
 SetTTFName(0x409, 14, "http://scripts.sil.org/OFL");
 SetTTFName(0x409, 13, "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL");
 
@@ -27,12 +29,12 @@ SetOS2Value("HHeadDescent", -255); # TypoDescent
 SetOS2Value("WinAscent", 800);     # Font bbox yMax
 SetOS2Value("WinDescent", -200);   # Font bbox yMin
 
-# set encoding to add glyphs with no paths
-Reencode("iso8859-1");
+Reencode("unicode");
 # add space and nbspace glyphs
 # and make them worth selecting
-Select(0x20, 0xA0);
+SelectSingletons(0u0020, 0u00A0)
 SetWidth(560);
+Reencode("compacted");
 
 SelectWorthOutputting();
 Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
@@ -44,6 +46,14 @@ RemoveOverlap();
 Simplify();
 AddExtrema();
 RoundToInt();
+
+SelectSingletons(0u251C, 0u250C, 0u2514); # ├ ┌ └
+Transform(100, 0, 0, 100, 11400, 0);     # Move right 114 units
+SetWidth(560);
+SelectSingletons(0u2524, 0u2510, 0u2518); # ┤ ┐ ┘
+Transform(100, 0, 0, 100, -11400, 0);    # Move left 114 units
+SetWidth(560);
+
 SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular", OFL_NOTICE);
 regular_file="BrassMono-Regular.sfd";
 Save("dist/forge/" + regular_file);
