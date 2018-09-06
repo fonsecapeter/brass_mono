@@ -1,9 +1,8 @@
 #! /usr/bin/env fontforge
 # usage: bin/forge.pe
 #   - positions and scales glyphs
-#   - generates cozy, standard, and comfortable spacing
 #   - generates bold weights
-#   - outputs sfd, otfs, and ttfs for each
+#   - outputs sfd, ttfs for each
 
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
 Open("src/BrassMono.svg");
@@ -13,6 +12,21 @@ SetOS2Value("FSType", 0);
 SetTTFName(0x409, 14, "http://scripts.sil.org/OFL");
 SetTTFName(0x409, 13, "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL");
 
+SetOS2Value("TypoAscentIsOffset", 0);
+SetOS2Value("TypoDescentIsOffset", 0);
+SetOS2Value("HHeadAscentIsOffset", 0);
+SetOS2Value("HHeadDescentIsOffset", 0);
+SetOS2Value("WinAscentIsOffset", 0);
+SetOS2Value("WinDescentIsOffset", 0);
+
+SetOS2Value("TypoAscent", 745);    # Ascender
+SetOS2Value("TypoDescent", -255);  # TypoAscent - UPM
+SetOS2Value("TypoLineGap", 250);   # 0.25 * UPM
+SetOS2Value("HHeadAscent", 745);   # TypoAscent
+SetOS2Value("HHeadDescent", -255); # TypoDescent
+SetOS2Value("WinAscent", 800);     # Font bbox yMax
+SetOS2Value("WinDescent", -200);   # Font bbox yMin
+
 # set encoding to add glyphs with no paths
 Reencode("iso8859-1");
 # add space and nbspace glyphs
@@ -20,12 +34,8 @@ Reencode("iso8859-1");
 Select(0x20, 0xA0);
 SetWidth(560);
 
-# select all relevant glyphs and make them
-# the right size in the right place
 SelectWorthOutputting();
-ScaleToEm(800, 200);
-Scale(120);  # Should resize inkscape document size to match...
-Transform(100, 0, 0, 100, 0, -32000);  # Move down 320 units
+Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
 CenterInWidth();
 SetWidth(560);
 SetFontOrder(2);
