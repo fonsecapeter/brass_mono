@@ -40,12 +40,12 @@ SelectWorthOutputting();
 Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
 CenterInWidth();
 SetWidth(560);
-SetFontOrder(2);
-CorrectDirection();
-RemoveOverlap();
-Simplify();
-AddExtrema();
-RoundToInt();
+# SetFontOrder(2);
+# CorrectDirection();
+# RemoveOverlap();
+# Simplify();
+# AddExtrema();
+# RoundToInt();
 
 SelectSingletons(0u251C, 0u250C, 0u2514); # ├ ┌ └
 Transform(100, 0, 0, 100, 11400, 0);     # Move right 114 units
@@ -65,10 +65,10 @@ SelectWorthOutputting();
 SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE);
 SetOS2Value("Weight", 700);
 ExpandStroke(30, 1, 1, 0, 1);
-RemoveOverlap();
-Simplify();
-AddExtrema();
-RoundToInt();
+# RemoveOverlap();
+# Simplify();
+# AddExtrema();
+# RoundToInt();
 bold_file="BrassMono-Bold.sfd";
 Save("dist/forge/" + bold_file);
 Save("dist/forge/" + bold_file:r + "Italic.sfd");
