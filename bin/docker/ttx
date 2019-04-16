@@ -17,10 +17,10 @@ function add_dsig() {
 
 /app/bin/print start 'Recompiling fonts through ttx'
 
-ttx -x FFTM /app/dist/ttx/*.ttf
+ ttx -x FFTM /app/dist/ttx/*.ttf
 for ttx_font in /app/dist/ttx/*.ttx; do
   add_dsig "${ttx_font}"
-  ttx \
+   ttx \
     -o "/app/dist/unhinted/$(basename ${ttx_font%.*}).ttf" \
     "${ttx_font}"
 done

@@ -30,9 +30,9 @@ SetOS2Value("WinAscent", 800);     # Font bbox yMax
 SetOS2Value("WinDescent", -200);   # Font bbox yMin
 
 Reencode("unicode");
-# add space and nbspace glyphs
+# add space, nbspace, and accented glyphs
 # and make them worth selecting
-SelectSingletons(0u0020, 0u00A0)
+SelectSingletons(0u0020, 0u00A0, 0u00E1, 0u00E9, 0u00ED, 0u00F3, 0u00FA);
 SetWidth(560);
 Reencode("compacted");
 
@@ -40,6 +40,10 @@ SelectWorthOutputting();
 Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
 CenterInWidth();
 SetWidth(560);
+
+# add diacritics
+BuildAccented();
+
 # SetFontOrder(2);
 # CorrectDirection();
 # RemoveOverlap();

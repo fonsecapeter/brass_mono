@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-# No help
+# Remove generated files
 set -e -o pipefail
 
 bin/print start 'Removing generated files'
 rm -vf dist/forge/*.sfd || true
 rm -vf dist/unhinted/*.ttf || true
 rm -vf dist/ttx/*.ttx || true
+rm -vf dist/ttx/*.ttf || true
+rm -vf dist/ttx/*.temp || true
 rm -vf dist/BrassMono/*.ttf || true
 rm -vf dist/BrassMono/*.xml || true
+rm -vf dist/BrassMono/*.txt || true
 
 rm -vf dist/BrassMono.zip || true
 bin/print end 'Squeeky clean :D'

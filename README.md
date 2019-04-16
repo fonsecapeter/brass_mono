@@ -4,7 +4,7 @@
 
 [Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
-![brass_mono](/media/brass_mono.png 'brass_mono.png')
+![brass_mono](/documentation/sample.png 'sample.png')
 
 A free retro monospaced font inspired by 70's electrical and mechanical design. It's open source, a solid choice for writing code, and pairs well with [shellectric colors](https://github.com/fonsecapeter/shellectric-color-scheme).
 

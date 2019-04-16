@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
-fontbakery \
+ fontbakery \
   check-googlefonts \
   -l FAIL \
   /app/dist/BrassMono/*.ttf
