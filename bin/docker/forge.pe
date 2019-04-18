@@ -30,19 +30,58 @@ SetOS2Value("WinAscent", 800);     # Font bbox yMax
 SetOS2Value("WinDescent", -200);   # Font bbox yMin
 
 Reencode("unicode");
-# add space, nbspace, and accented glyphs
-# and make them worth selecting
-SelectSingletons(0u0020, 0u00A0, 0u00E1, 0u00E9, 0u00ED, 0u00F3, 0u00FA);
+# make these worth selecting
+# space, nbsp, .null, nomarkingreturn, en-space, zero-width space, thin-space
+SelectSingletons(0u0020, 0u00A0, 0u0000, 0u000D, 0u2002, 0u200B, 0u2009);
 SetWidth(560);
-Reencode("compacted");
 
 SelectWorthOutputting();
 Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
 CenterInWidth();
 SetWidth(560);
 
-# add diacritics
+# add diacritics (manual ones didn't come out right automatically)
+# acute accent: aeiou (manually do y)
+SelectSingletons(0u00E1, 0u00E9, 0u00ED, 0u00F3, 0u00FA);
 BuildAccented();
+# acute accent: AEIOUY
+SelectSingletons(0u00C1, 0u00C9, 0u00CD, 0u00D3, 0u00DA, 0u00DD);
+BuildAccented();
+# tilde accent: ano
+SelectSingletons(0u00E3, 0u00F1, 0u00F5);
+BuildAccented();
+# tilde accent: AO (manually do N)
+SelectSingletons(0u00C3, 0u00D5);
+BuildAccented();
+# umlaut: aeiou
+SelectSingletons(0u00E4, 0u00EB, 0u00EF, 0u00F6, 0u00FC);
+BuildAccented();
+# umlaut: AEIOU
+SelectSingletons(0u00C4, 0u00CB, 0u00CF, 0u00D6, 0u00DC);
+BuildAccented();
+# cedilha: cC
+SelectSingletons(0u00E7, 0u00C7);
+BuildAccented();
+# grave accent, aeiou
+SelectSingletons(0u00E0, 0u00E8, 0u00EC, 0u00F2, 0u00F9);
+BuildAccented();
+# grave accent, AEIOU
+SelectSingletons(0u00C0, 0u00C8, 0u00CC, 0u00D2, 0u00D9);
+BuildAccented();
+# circumflex, aeiou
+SelectSingletons(0u00E2, 0u00EA, 0u00EE, 0u00F4, 0u00FB);
+BuildAccented();
+# circumflex, AEIOU
+SelectSingletons(0u00C2, 0u00CA, 0u00CE, 0u00D4, 0u00DB);
+BuildAccented();
+# rung above: aA
+SelectSingletons(0u00E5, 0u00C5);
+BuildAccented();
+
+SelectWorthOutputting();
+SetWidth(560);
+CorrectDirection();
+Reencode("compacted");
 
 # SetFontOrder(2);
 # CorrectDirection();
