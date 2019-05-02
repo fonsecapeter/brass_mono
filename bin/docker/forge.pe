@@ -21,13 +21,19 @@ SetOS2Value("HHeadDescentIsOffset", 0);
 SetOS2Value("WinAscentIsOffset", 0);
 SetOS2Value("WinDescentIsOffset", 0);
 
+# https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align
+# EMSquare: 1000 UPM, main box is:
+#   - 800 over
+#   - 200 below as
+#   - shifted down 200 units from inkscape
+#   - yMax/Min is bigger bc diacritics
 SetOS2Value("TypoAscent", 745);    # Ascender
-SetOS2Value("TypoDescent", -255);  # TypoAscent - UPM
+SetOS2Value("TypoDescent", -255);  # TypoAscent - UPM, negative
 SetOS2Value("TypoLineGap", 250);   # 0.25 * UPM
 SetOS2Value("HHeadAscent", 745);   # TypoAscent
-SetOS2Value("HHeadDescent", -255); # TypoDescent
-SetOS2Value("WinAscent", 800);     # Font bbox yMax
-SetOS2Value("WinDescent", -200);   # Font bbox yMin
+SetOS2Value("HHeadDescent", -255); # TypoDescent, negative
+SetOS2Value("WinAscent", 945);     # Font bbox yMax
+SetOS2Value("WinDescent", 215);    # Font bbox yMin, positive distance below 0
 
 Reencode("unicode");
 # make these worth selecting
