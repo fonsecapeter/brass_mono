@@ -13,6 +13,7 @@ A free retro monospaced font inspired by 70's electrical and mechanical design
 From the root dir (assuming linux with apt pkg manager):
 
 - first run `bin/init` to set up the dependencies
+  - you can skip this if you cloned or pulled with `--recurse-submodules`
 - edit the svg font and save
 - run `bin/build` to build and zip the fonts with fontforge
 - run `bin/install` to install the fonts to your user account

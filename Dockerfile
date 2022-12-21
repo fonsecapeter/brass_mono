@@ -13,18 +13,14 @@ RUN apt update \
     cmake \
     fontforge \
     meson \
+    ninja-build \
     tree \
     ttfautohint \
     zip
-# RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-# RUN cargo --version
-# RUN rustc --version
-# RUN pip install --upgrade pip==22.3.1 \
-#   && pip install pip-tools==6.12.1 \
-#   && pip install -r /app/requirements.txt
-RUN pip install --no-cache-dir poetry>=0.12 \
-  && poetry config settings.virtualenvs.create false \
-  && poetry install --no-interaction
+RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN pip install --upgrade pip==22.3.1 \
+  && pip install pip-tools==6.12.1 \
+  && pip install -r /app/requirements.txt
 
 WORKDIR /app/lib/ots
 RUN meson build \
