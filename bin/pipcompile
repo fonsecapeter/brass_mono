@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Compile requirements.txt from requirements.in
+set -e -o pipefail
+
+source bin/export-docker-tag
+docker-compose run --rm brass-mono /app/bin/docker/pipcompile "${@}"

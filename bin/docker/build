@@ -2,14 +2,14 @@
 # Build fonts from inkscape svg
 set -e -o pipefail
 
-bin/print start 'Forging fonts'
-bin/docker/forge.pe
+/app/bin/print start 'Forging fonts'
+/app/bin/docker/forge.pe
 
-bin/docker/build-italic
-bin/docker/ttx
-bin/docker/hint
+/app/bin/docker/build-italic
+/app/bin/docker/ttx
+/app/bin/docker/hint
 
-bin/print end: 'Fonts forged'
+/app/bin/print end: 'Fonts forged'
 tree dist/BrassMono
 
-bin/package
+/app/bin/package

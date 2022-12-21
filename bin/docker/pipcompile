@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e -o pipefail
+
+pip-compile ${@} /app/requirements.in -o /app/requirements.txt

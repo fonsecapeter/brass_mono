@@ -15,12 +15,12 @@ function add_dsig() {
   mv "${1}.tmp" "${1}"
 }
 
-bin/print start 'Recompiling fonts through ttx'
+/app/bin/print start 'Recompiling fonts through ttx'
 
-ttx -x FFTM dist/ttx/*.ttf
-for ttx_font in dist/ttx/*.ttx; do
+ttx -x FFTM /app/dist/ttx/*.ttf
+for ttx_font in /app/dist/ttx/*.ttx; do
   add_dsig "${ttx_font}"
   ttx \
-    -o "dist/unhinted/$(basename ${ttx_font%.*}).ttf" \
+    -o "/app/dist/unhinted/$(basename ${ttx_font%.*}).ttf" \
     "${ttx_font}"
 done

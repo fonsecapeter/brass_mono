@@ -1,6 +1,8 @@
-FROM python:3.7
-MAINTAINER Peter Fonseca <peter.nfonseca@gmail.com>
+FROM python:3.8
+LABEL maintainer="Peter Fonseca <peter.nfonseca@gmail.com>"
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/root/.cargo/bin:${PATH}"
 ENV PYTHONUNBUFFERED=1
 ENV TERM=xterm
 COPY . /app
@@ -8,15 +10,18 @@ WORKDIR /app
 
 RUN apt update \
   && apt install -y \
+    cmake \
     fontforge \
     meson \
     tree \
     ttfautohint \
     zip
-# TODO: Go back to latest pipenv
-# see https://github.com/pypa/pipenv/issues/4273
-RUN pip install pipenv==2018.11.26
-RUN pipenv install --system
+RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN cargo --version
+RUN rustc --version
+RUN pip install --upgrade pip==22.3.1 \
+  && pip install pip-tools==6.12.1 \
+  && pip install -r /app/requirements.txt
 
 WORKDIR /app/lib/ots
 RUN meson build \
@@ -24,4 +29,4 @@ RUN meson build \
   && cp build/ots-sanitize /usr/local/bin
 WORKDIR /app
 
-CMD bin/docker/build
+CMD /app/bin/docker/build

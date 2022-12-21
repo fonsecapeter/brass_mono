@@ -2,5 +2,5 @@
 # Build fonts from inkscape svg
 set -e -o pipefail
 
-bin/print start 'Forging italic fonts'
-bin/docker/forge-italic.pe
+/app/bin/print start 'Forging italic fonts'
+/app/bin/docker/forge-italic.pe

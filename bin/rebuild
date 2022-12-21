@@ -7,4 +7,4 @@ source bin/export-docker-tag
 docker-compose run --rm \
   --user=$(id -u) \
   brass-mono \
-  bin/docker/build
+  /app/bin/docker/build
