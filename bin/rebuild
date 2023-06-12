@@ -5,6 +5,6 @@ set -e -o pipefail
 bin/clean-dist
 source bin/export-docker-tag
 docker-compose run --rm \
-  --user=$(id -u) \
   brass-mono \
   /app/bin/docker/build
+  # --user=$(id -u) \

@@ -18,6 +18,9 @@ RUN apt update \
     ttfautohint \
     zip
 RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN mkdir /root/.FontForge \
+  && touch /root/.FontForge/hotkeys
+
 RUN pip install --upgrade pip==22.3.1 \
   && pip install pip-tools==6.12.1 \
   && pip install -r /app/requirements.txt

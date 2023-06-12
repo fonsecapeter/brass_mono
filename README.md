@@ -20,4 +20,4 @@ From the root dir (assuming linux with apt pkg manager):
   - will update if already installed in ~/.fonts/BrassMonoFonts
 - run `bin/help` to see all project management commands
 
-> fontforge docs: https://fontforge.github.io/scripting.html
+> fontforge docs: https://fontforge.org/docs/scripting/scripting.html

@@ -1,9 +1,11 @@
 #! /usr/bin/env fontforge
 # usage: bin/forge.pe
 #   - positions and scales glyphs
+#   - builds diacritics
 #   - generates bold weights
 #   - outputs sfd, ttfs for each
 
+Print("Forging Brass Mono")
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
 Open("src/BrassMono.svg");
 SetOS2Value("VendorId", "FNSA");
@@ -46,6 +48,7 @@ Transform(100, 0, 0, 100, 0, -20000);  # Move down 200 units
 CenterInWidth();
 SetWidth(560);
 
+Print("  - adding diacritics")
 # add diacritics (manual ones didn't come out right automatically)
 # acute accent: aeiou (manually do y)
 SelectSingletons(0u00E1, 0u00E9, 0u00ED, 0u00F3, 0u00FA);
@@ -109,6 +112,7 @@ Save("dist/forge/" + regular_file);
 Generate("dist/ttx/" + regular_file:r + ".ttf");
 Close();
 
+Print("  - expanding bold version")
 Open("dist/forge/" + regular_file);
 SelectWorthOutputting();
 SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE);
