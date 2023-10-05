@@ -3,5 +3,5 @@
 set -e -o pipefail
 
 cp OFL.txt OFL-FAQ.txt dist/BrassMono
-zip -x *.gitkeep -r dist/BrassMono.zip dist/BrassMono
+zip -j -x *.gitkeep -r dist/BrassMono.zip dist/BrassMono
 bin/print end 'Compressed in BrassMono.zip'

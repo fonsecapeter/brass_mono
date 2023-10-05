@@ -3,4 +3,4 @@
 set -e -o pipefail
 
 source bin/export-docker-tag
-docker-compose run --rm brass-mono /app/bin/docker/pipcompile "${@}"
+docker compose run --rm brass-mono /app/bin/docker/pipcompile "${@}"

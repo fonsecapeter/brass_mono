@@ -1,0 +1,58 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.08
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Initialize submodules
+          command: git submodule update --init --recursive
+      - run:
+          name: Build image
+          command: docker build -t "fonsecapeter/brass-mono:${CIRCLE_SHA1:0}" .
+      - run:
+          name: Save image as tar
+          command: |
+            docker image save -o ".circleci_images/fonsecapeter-brass-mono:${CIRCLE_SHA1:0}" "fonsecapeter/brass-mono:${CIRCLE_SHA1:0}"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .circleci_images
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Export fonts
+                command: docker cp "$(docker create --name=tc fonsecapeter/brass-mono:${CIRCLE_SHA1:0}):/app/dist/BrassMono.zip" dist/ && docker rm tc
+            - store_artifacts:
+                path: dist/BrassMono.zip
+                destination: BrassMono.zip
+
+  test:
+    docker:
+      - image: cimg/base:2023.08
+    steps:
+      - attach_workspace:
+          at: .
+      - setup_remote_docker
+      - run:
+          name: Load image
+          command: |
+            docker image load < ".circleci_images/fonsecapeter-brass-mono:${CIRCLE_SHA1:0}"
+      - run:
+          name: Test
+          command: |
+            docker run "fonsecapeter/brass-mono:${CIRCLE_SHA1:0}" bin/docker/lint || true
+
+
+workflows:
+  run-jobs:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

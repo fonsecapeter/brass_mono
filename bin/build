@@ -3,6 +3,4 @@
 set -e -o pipefail
 
 source bin/export-docker-tag
-docker-compose run --rm \
-  --user=$(id -u) \
-  brass-mono
+docker compose up

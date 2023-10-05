@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-# No help
-set -e -o pipefail
-
-source bin/export-docker-tag
-docker build . -t "brass-mono:${DOCKER_TAG}"
-docker run -it "brass-mono:${DOCKER_TAG}"

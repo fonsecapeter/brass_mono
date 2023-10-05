@@ -8,3 +8,4 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
+    command: [/app/bin/docker/build]

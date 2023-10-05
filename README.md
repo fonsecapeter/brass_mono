@@ -1,6 +1,6 @@
 # Brass Mono
 
-[![Build Status](https://travis-ci.org/fonsecapeter/brass_mono.svg?branch=master)](https://travis-ci.org/fonsecapeter/brass_mono.svg)
+[![Build Status, hopefully green...](https://circleci.com/gh/fonsecapeter/brass_mono.svg?style=svg)](https://app.circleci.com/pipelines/github/fonsecapeter/brass_mono)
 
 [Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
@@ -31,12 +31,14 @@ flowchart LR
 This repo is built to [google-fonts spec](https://googlefonts.github.io/gf-guide/), which is enforced via [fontbakery](https://github.com/fonttools/fontbakery) (`bin/lint`).
 
 To start working:
-- first run `bin/init` to set up the dependencies
+- first run `bin/init` to initialize git submodules
   - you can skip this if you cloned or pulled with `--recurse-submodules`
-- edit `src/BrassMono.svg` in inkscape
-- compile and zip final fonts with `bin/build`
-- test font quality with `bin/lint`
-- manually test with `bin/install` to install the fonts to your user account
+- create your docker image with `bin/build`
+  - will compile and zip fonts
+- edit `src/BrassMono.svg` in inkscape with changes
+- run `bin/rebuild` to re-compile and zip fonts
+- test compiled font quality with `bin/lint`
+- manually test on your computer with `bin/install`
   - will update if already installed in ~/.fonts/BrassMonoFonts
-  - or just open `/dist/BrassMono` with Font Book on mac
+  - or just open `/dist/BrassMono` with Font Book if you're using a mac
 - run `bin/help` to see all project management commands

@@ -31,4 +31,4 @@ RUN meson build \
   && cp build/ots-sanitize /usr/local/bin
 WORKDIR /app
 
-CMD /app/bin/docker/build
+RUN /app/bin/docker/build
