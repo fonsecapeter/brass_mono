@@ -21,7 +21,7 @@ for file in bin/*; do
     continue
   fi
   printf \
-    "  $(tput setaf 2)%.16s$(tput sgr0)%s\n" \
-    "${name}$(tput setaf 8)...................." \
+    "  $(tput setaf 2)%.17s$(tput sgr0)%s\n" \
+    "${name}$(tput setaf 8)....................." \
     "${description}"
 done

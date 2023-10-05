@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
+# fontbakery doesn't like having a duplicate OFL.txt
+rm /app/dist/BrassMono/OFL.txt
+
 fontbakery \
   check-googlefonts \
   -l FAIL \
   /app/dist/BrassMono/*.ttf
+
+cp /app/OFL.txt /app/dist/BrassMono/

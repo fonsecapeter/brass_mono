@@ -2,5 +2,6 @@
 # Clean and rebuild fonts from inkscape svg
 set -e -o pipefail
 
-/app/bin/clean-fonts
+/app/bin/clean-dist
 /app/bin/docker/build
+

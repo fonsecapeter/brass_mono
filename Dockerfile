@@ -13,14 +13,16 @@ RUN apt update \
     cmake \
     fontforge \
     meson \
+    ninja-build \
     tree \
     ttfautohint \
     zip
 RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN cargo --version
-RUN rustc --version
-RUN pip install --upgrade pip==22.3.1 \
-  && pip install pip-tools==6.12.1 \
+RUN mkdir /root/.FontForge \
+  && touch /root/.FontForge/hotkeys
+
+RUN pip install --upgrade pip==23.2.1 \
+  && pip install pip-tools==7.3.0 \
   && pip install -r /app/requirements.txt
 
 WORKDIR /app/lib/ots

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Clean up generated files
+# Remove generated files and docker
 set -e -o pipefail
 
 source bin/export-docker-tag
 bin/print start-first 'Cleaning the docks'
-docker-compose rm --force -v
+docker-compose rm --stop --force -v
 docker system prune --force
+docker image rm brass-mono:local
 
 echo
-bin/clean-files
+bin/clean-dist

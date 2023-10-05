@@ -2,9 +2,9 @@
 # Clean and rebuild fonts from inkscape svg
 set -e -o pipefail
 
-bin/clean
+bin/clean-dist
 source bin/export-docker-tag
 docker-compose run --rm \
-  --user=$(id -u) \
   brass-mono \
   /app/bin/docker/build
+  # --user=$(id -u) \
