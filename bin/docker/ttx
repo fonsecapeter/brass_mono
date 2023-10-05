@@ -15,12 +15,56 @@ function add_dsig() {
   mv "${1}.tmp" "${1}"
 }
 
+function update_table_value() {
+  # fontforge scripting doesn't support all OS/2 or POST table values, so need to hack it in there
+  # Args:
+  #  - 1: field name
+  #  - 2: field value
+  #  - 3: ttx file to edit
+
+  if grep -q "    <${1} value=" "${3}"; then
+    # Because ttx is standardized, all table values (that I care about) will be indented the same
+    # For now this is just OS_2 and POST
+    sed -i -e "s|\    <${1} value=.*|\    <${1} value=\"${2}\"\/>|" "${3}"
+  else
+    echo "Whoops, looks like ${3} doesn't have a ${1} value. Either you typo'd something or need to sed append something"
+    exit 1
+  fi
+}
+
+function add_to_os_2_table() {
+  # Add an entry to the OS/2 table
+  # Args:
+  #  - 1: OS/2 field name
+  #  - 2: OS/2 field value
+  #  - 3: ttx file to edit
+  if grep -q "    <${1} value=" "${3}"; then
+    echo "Whoops, looks like ${1} is already in the OS/2 table, Either you typo'd something or need to use update_table_value"
+    exit 1
+  else
+    # append line under the OS/2 table tag
+    sed -i -e "/\  <OS_2>/a \    <${1} value=\"${2}\"\/>" "${3}"
+  fi
+}
+
 /app/bin/print start 'Recompiling fonts through ttx'
 
- ttx -x FFTM /app/dist/ttx/*.ttf
+ttx -x FFTM /app/dist/ttx/*.ttf
+
+# Need to set but #7 to 1 for monospace (read from right to left, start at 0)
+update_table_value 'fsSelection' '00000000 11000000' "/app/dist/ttx/BrassMono-Regular.ttx"
+update_table_value 'fsSelection' '00000000 10100000' "/app/dist/ttx/BrassMono-Bold.ttx"
+update_table_value 'fsSelection' '00000000 10000001' "/app/dist/ttx/BrassMono-Italic.ttx"
+update_table_value 'fsSelection' '00000000 10100001' "/app/dist/ttx/BrassMono-BoldItalic.ttx"
+
 for ttx_font in /app/dist/ttx/*.ttx; do
   add_dsig "${ttx_font}"
-   ttx \
+  update_table_value 'isFixedPitch' '1' "${ttx_font}"
+  # x-height is low_x ymax in any of the ttx files
+  add_to_os_2_table 'sxHeight' '478' "${ttx_font}"
+  # cap-height is cap_x ymax in any of the ttx files
+  add_to_os_2_table 'capHeight' '649' "${ttx_font}"
+  ttx \
     -o "/app/dist/unhinted/$(basename ${ttx_font%.*}).ttf" \
     "${ttx_font}"
 done

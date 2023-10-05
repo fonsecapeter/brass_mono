@@ -5,14 +5,14 @@
 #   - generates bold weights
 #   - outputs sfd, ttfs for each
 
-Print("Forging Brass Mono")
+FONT_VERSION="1.000";
+Print("Forging Brass Mono v", FONT_VERSION)
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
 Open("src/BrassMono.svg");
 SetOS2Value("VendorId", "FNSA");
 SetOS2Value("Weight", 400);
 SetOS2Value("FSType", 0);
 SetOS2Value("Panose", [2,0,5,9,0,0,0,0,0,0]);
-# SetIsFixedPitch(1);
 SetTTFName(0x409, 14, "http://scripts.sil.org/OFL");
 SetTTFName(0x409, 13, "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL");
 
@@ -23,19 +23,22 @@ SetOS2Value("HHeadDescentIsOffset", 0);
 SetOS2Value("WinAscentIsOffset", 0);
 SetOS2Value("WinDescentIsOffset", 0);
 
+# TODO: Use a 1200 EMSquare in the svg + narrower width
+# (something around 467 but choose a clean number)
 # https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align
 # EMSquare: 1000 UPM, main box is:
 #   - 800 over
-#   - 200 below as
-#   - shifted down 200 units from inkscape
-#   - yMax/Min is bigger bc diacritics
+#   - 200 below
+#   - shifted down 200 units from inkscape (y=0 is bottom of viewport there)
+#   - yMax/Min is bigger bc diacritics (maybe fix this?)
 SetOS2Value("TypoAscent", 745);    # Ascender
 SetOS2Value("TypoDescent", -255);  # TypoAscent - UPM, negative
-SetOS2Value("TypoLineGap", 250);   # 0.25 * UPM
+SetOS2Value("TypoLineGap", 0);     # Google Fonts requires 0, used to be 0.25*UPM=250
+SetOS2Value("HHeadLineGap", 0);    # Google Fonts requires 0
 SetOS2Value("HHeadAscent", 745);   # TypoAscent
 SetOS2Value("HHeadDescent", -255); # TypoDescent, negative
-SetOS2Value("WinAscent", 945);     # Font bbox yMax
-SetOS2Value("WinDescent", 215);    # Font bbox yMin, positive distance below 0
+SetOS2Value("WinAscent", 894);     # Used to be font bbox yMax (945), but google fonts likes it closer
+SetOS2Value("WinDescent", 215);    # Font bbox yMin as positive distance below 0
 
 Reencode("unicode");
 # make these worth selecting
@@ -106,7 +109,7 @@ SelectSingletons(0u2524, 0u2510, 0u2518); # ┤ ┐ ┘
 Transform(100, 0, 0, 100, -11400, 0);    # Move left 114 units
 SetWidth(560);
 
-SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular", OFL_NOTICE);
+SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular", OFL_NOTICE, FONT_VERSION);
 regular_file="BrassMono-Regular.sfd";
 Save("dist/forge/" + regular_file);
 Generate("dist/ttx/" + regular_file:r + ".ttf");
@@ -115,7 +118,7 @@ Close();
 Print("  - expanding bold version")
 Open("dist/forge/" + regular_file);
 SelectWorthOutputting();
-SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE);
+SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE, FONT_VERSION);
 SetOS2Value("Weight", 700);
 ExpandStroke(30, 1, 1, 0, 1);
 # RemoveOverlap();
