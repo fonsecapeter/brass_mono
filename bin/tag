@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Tag for release
-# usage: bin/tag [patch | minor | major]
+# Based on https://googlefonts.github.io/gf-guide/requirements.html#font-versioning
+# usage: bin/tag [patch | minor | significant | major]
 #   - defaults to patch
 set -e -o pipefail
 
@@ -9,7 +10,7 @@ function get_latest_tag() {
     git describe --abbrev=0 --tags \
       | sed 's/v//' \
   )
-  echo "${version:-'0.0.0'}"
+  echo "${version:-'0.000'}"
 }
 
 function needs_tag() {
@@ -19,23 +20,38 @@ function needs_tag() {
 function main() {
   local version=$(get_latest_tag)
   local major="${version%%.*}"; version="${version#*.}"
-  local minor="${version%%.*}"; version="${version#*.}"
-  local patch="${version%%.*}"; version="${version#*.}"
+  local rest="${version%%.*}"; version="${version#*.}"
 
-  # Incement
+  # Increment
   if [ "${1}" == 'major' ]; then
     major=$((major+1))
+  elif [ "${1}" == 'significant' ]; then
+    rest=$((rest+100))
   elif [ "${1}" == 'minor' ]; then
-    minor=$((minor+1))
+    rest=$((rest+10))
+  elif [ "${1}" == 'patch' ]; then
+    rest=$((rest+1))
   else
-    patch=$((patch+1))
+    bin/print end-first "ERROR: unknown increment: ${1}"
+    exit 1
   fi
 
   # Create new tag
   if [ -z "$needs_tag" ]; then
-    local -r new_version="$major.$minor.$patch"
+    local -r new_version=$(printf "%s.%03d" $major $rest)
+    if [ $rest -gt 999 ]; then
+      bin/print end-first "ERROR: can't use v${new_version}"
+      exit 1
+    fi
+    if !(grep -q "FONT_VERSION=\"${new_version}\""  bin/docker/forge.pe); then
+      bin/print end-first "ERROR: update FONT_VERSION to ${new_version} in bin/docker/forge.pe"
+      exit 1
+    fi
+    if !(grep -q "FONT_VERSION=\"${new_version}\""  bin/docker/forge-italic.pe); then
+      bin/print end-first "ERROR: update FONT_VERSION to ${new_version} in bin/docker/forge-italic.pe"
+      exit 1
+    fi
     bin/print end-first "Updating to v${new_version}"
-
     git tag -a "v${new_version}" -m "Version ${new_version}" $@
     git push origin "v${version}"
   else
@@ -43,4 +59,4 @@ function main() {
   fi
 }
 
-main
+main $@

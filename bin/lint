@@ -3,4 +3,4 @@
 set -e -o pipefail
 
 source bin/export-docker-tag
-docker-compose run --rm brass-mono /app/bin/docker/lint
+docker compose run --rm brass-mono /app/bin/docker/lint
