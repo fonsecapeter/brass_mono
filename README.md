@@ -35,7 +35,8 @@ flowchart LR
 This repo is built to [google-fonts spec](https://googlefonts.github.io/gf-guide/), which is enforced via [fontbakery](https://github.com/fonttools/fontbakery) (`bin/lint`).
 
 To start working:
-- first run `bin/init` to initialize git submodules
+- install [docker](https://www.docker.com) if you haven't yet
+- run `bin/init` to initialize git submodules
   - you can skip this if you cloned or pulled with `--recurse-submodules`
 - create your docker image with `bin/build`
   - will compile and zip fonts
