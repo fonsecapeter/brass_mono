@@ -5,7 +5,7 @@
 #   - generates bold weights
 #   - outputs sfd, ttfs for each
 
-FONT_VERSION="1.000";
+FONT_VERSION="1.100";
 Print("Forging Brass Mono v", FONT_VERSION)
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
 Open("src/BrassMono.svg");
@@ -95,6 +95,21 @@ SetWidth(560);
 CorrectDirection();
 Reencode("compacted");
 
+# 2x width ligatures
+SelectSingletons(171, 172, 173, 174, 175, 176);
+SetWidth(1120);
+CenterInWidth();
+
+# 3x width ligatures
+SelectSingletons(177, 178, 179);
+SetWidth(1680);
+CenterInWidth();
+
+# 4x width ligatures
+SelectSingletons(180);
+SetWidth(2240);
+CenterInWidth();
+
 # SetFontOrder(2);
 # CorrectDirection();
 # RemoveOverlap();
@@ -109,13 +124,21 @@ SelectSingletons(0u2524, 0u2510, 0u2518); # ┤ ┐ ┘
 Transform(100, 0, 0, 100, -11400, 0);    # Move left 114 units
 SetWidth(560);
 
+SetFontNames("BrassMonoCode-Regular", "Brass Mono Code", "Brass Mono Code Regular", "Regular", OFL_NOTICE, FONT_VERSION);
+regular_code_file="BrassMonoCode-Regular.sfd";
+Save("dist/forge/" + regular_code_file);
+Generate("dist/ttx/" + regular_code_file:r + ".ttf");
+
+Print("  - splitting out ligatures")
+SelectSingletons(171, 172, 173, 174, 175, 176, 177, 178, 179, 180)
+DetachAndRemoveGlyphs()
 SetFontNames("BrassMono-Regular", "Brass Mono", "Brass Mono Regular", "Regular", OFL_NOTICE, FONT_VERSION);
 regular_file="BrassMono-Regular.sfd";
 Save("dist/forge/" + regular_file);
 Generate("dist/ttx/" + regular_file:r + ".ttf");
 Close();
 
-Print("  - expanding bold version")
+Print("  - expanding bold versions")
 Open("dist/forge/" + regular_file);
 SelectWorthOutputting();
 SetFontNames("BrassMono-Bold", "Brass Mono", "Brass Mono Bold", "Bold", OFL_NOTICE, FONT_VERSION);
@@ -129,4 +152,19 @@ bold_file="BrassMono-Bold.sfd";
 Save("dist/forge/" + bold_file);
 Save("dist/forge/" + bold_file:r + "Italic.sfd");
 Generate("dist/ttx/" + bold_file:r + ".ttf");
+Close();
+
+Open("dist/forge/" + regular_code_file);
+SelectWorthOutputting();
+SetFontNames("BrassMonoCode-Bold", "Brass Mono Code", "Brass Mono Code Bold", "Bold", OFL_NOTICE, FONT_VERSION);
+SetOS2Value("Weight", 700);
+ExpandStroke(30, 1, 1, 0, 1);
+# RemoveOverlap();
+# Simplify();
+# AddExtrema();
+# RoundToInt();
+bold_code_file="BrassMonoCode-Bold.sfd";
+Save("dist/forge/" + bold_code_file);
+Save("dist/forge/" + bold_code_file:r + "Italic.sfd");
+Generate("dist/ttx/" + bold_code_file:r + ".ttf");
 Close();
