@@ -3,7 +3,7 @@
 
 Print("Forging Brass Mono Italic")
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
-FONT_VERSION="1.000";
+FONT_VERSION="1.100";
 Open("dist/forge/BrassMono-Regular.sfd");
 SelectWorthOutputting();
 Skew(13);
@@ -34,4 +34,39 @@ SetMacStyle("Bold Italic");
 SetTTFName(0x409, 2, "Bold Italic");
 Save("dist/forge/" + bold_file:r + "Italic.sfd");
 Generate("dist/ttx/" + bold_file:r + "Italic.ttf");
+Close();
+
+Print("Forging Brass Mono Code Italic")
+OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
+FONT_VERSION="1.100";
+Open("dist/forge/BrassMonoCode-Regular.sfd");
+SelectWorthOutputting();
+Skew(13);
+# RemoveOverlap();
+# Simplify();
+# AddExtrema();
+# RoundToInt();
+SetItalicAngle(-13);
+SetFontNames("BrassMonoCode-Italic", "Brass Mono Code", "Brass Mono Code Italic", "Italic", OFL_NOTICE, FONT_VERSION);
+SetMacStyle("Italic");
+SetTTFName(0x409, 2, "Italic");
+Save("dist/forge/BrassMonoCode-Italic.sfd");
+Generate("dist/ttx/BrassMonoCode-Italic.ttf");
+Close();
+
+Print("  - expanding bold version")
+bold_code_file="BrassMonoCode-Bold.sfd";
+Open("dist/forge/" + bold_code_file);
+SelectWorthOutputting();
+Skew(13);
+# RemoveOverlap();
+# Simplify();
+# AddExtrema();
+# RoundToInt();
+SetItalicAngle(-13);
+SetFontNames("BrassMonoCode-BoldItalic", "Brass Mono Code", "Brass Mono Code Bold Italic", "Bold Italic", OFL_NOTICE, FONT_VERSION);
+SetMacStyle("Bold Italic");
+SetTTFName(0x409, 2, "Bold Italic");
+Save("dist/forge/" + bold_code_file:r + "Italic.sfd");
+Generate("dist/ttx/" + bold_code_file:r + "Italic.ttf");
 Close();

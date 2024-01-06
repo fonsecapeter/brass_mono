@@ -4,18 +4,22 @@ set -e -o pipefail
 
 /app/bin/print start 'Hinting fonts'
 declare -ar source_files=(
+  'BrassMono-Regular'
   'BrassMono-Italic'
   'BrassMono-Bold'
   'BrassMono-BoldItalic'
+  'BrassMonoCode-Italic'
+  'BrassMonoCode-Bold'
+  'BrassMonoCode-BoldItalic'
 )
 
 ttfautohint -I \
-  /app/dist/unhinted/BrassMono-Regular.ttf \
-  /app/dist/BrassMono/BrassMono-Regular.ttf \
+  /app/dist/unhinted/BrassMonoCode-Regular.ttf \
+  /app/dist/BrassMono/BrassMonoCode-Regular.ttf
 
 for source_file in "${source_files[@]}"; do
   ttfautohint -I \
-    --reference=dist/unhinted/BrassMono-Regular.ttf \
+    --reference=dist/unhinted/BrassMonoCode-Regular.ttf \
     "/app/dist/unhinted/${source_file}.ttf" \
     "/app/dist/BrassMono/${source_file}.ttf"
 done

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Print demo (ex bin/ligature_demo "Brass Mono Code")
+set -e -o pipefail
+
+
+cat <<EOF
+
+
+  ${1}:
+
+      =>
+      ->
+      !=
+      ==
+      <=
+      >=
+      !==
+      ===
+      -->
+      <!--
+
+
+EOF

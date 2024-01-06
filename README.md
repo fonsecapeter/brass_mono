@@ -2,11 +2,18 @@
 
 [![Build Status, hopefully green...](https://circleci.com/gh/fonsecapeter/brass_mono.svg?style=svg)](https://app.circleci.com/pipelines/github/fonsecapeter/brass_mono)
 
+v1.100
+
 [Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 
 ![brass_mono](/documentation/sample.png 'sample.png')
 
 A free retro monospaced font inspired by 20th century electrical and mechanical design. It's open source, a solid choice for writing code, and pairs well with [krafftachrome](https://github.com/fonsecapeter/krafftachrome_visual_studio_code) or [shellectric colors](https://github.com/fonsecapeter/shellectric-color-scheme).
+
+## Now with Code Ligatures!
+This project actually contains 2 fonts: Brass Mono (no ligatures) and Brass Mono Code (with code ligatures), similar to [Fira Code ](https://github.com/tonsky/FiraCode) (but with way less ligatures).
+
+![code_ligatures](/documentation/code_ligatures.png 'code_ligatures.png')
 
 ### Origin Story
 
@@ -22,6 +29,8 @@ It wasn't until after I got so used to reading and writing in this font that I l
 
 If you like Brass Mono as much as I do, give it a download and feel free to use it in your own creations, even commercial ones!
 
+![-p](/documentation/p.jpg 'p.jpg')
+
 ### Development
 
 The build pipeline is fully scripted – main source file is `src/BrassMono.svg` which contains the svg glyphs that can be edited via the [inkscape svg font editor](https://inkscape-manuals.readthedocs.io/en/latest/creating-custom-fonts.html). From there, `ttf` font files are compiled into `/dist/BrassMono` using [fontforge](https://fontforge.org/docs/scripting/scripting.html).
@@ -30,13 +39,17 @@ The build pipeline is fully scripted – main source file is `src/BrassMono.svg`
 flowchart LR
   svg(src/BrassMono.svg) --> forge{bin/docker/forge.pe}
   forge --> reg(dist/BrassMono-Regular.ttf)
+  forge --> code-reg(dist/BrassMonoCode-Regular.ttf)
   forge --> bold(dist/BrassMono-Bold.ttf)
+  forge --> code-bold(dist/BrassMonoCode-Bold.ttf)
   svg --> forge-ital{bin/docker/forge-italic.pe}
   forge-ital --> ital(dist/BrassMono-Italic.ttf)
+  forge-ital --> code-ital(dist/BrassMonoCode-Italic.ttf)
   forge-ital --> bold-ital(dist/BrassMono-BoldItalic.ttf)
+  forge-ital --> code-bold-ital(dist/BrassMonoCode-BoldItalic.ttf)
 ```
 
-This repo is built to [google-fonts spec](https://googlefonts.github.io/gf-guide/), which is enforced via [fontbakery](https://github.com/fonttools/fontbakery) (`bin/lint`).
+This repo is built to [google-fonts spec](https://googlefonts.github.io/gf-guide/), which is enforced via [fontbakery](https://github.com/fonttools/fontbakery) (`bin/lint`). It's not fully compliant yet, but will be eventually!
 
 To start working:
 - install [docker](https://www.docker.com) if you haven't yet
