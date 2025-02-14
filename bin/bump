@@ -57,6 +57,7 @@ function main() {
   local -r new_version=$(printf "%s.%03d" $major $rest)
 
   sed -i "" "s/FONT_VERSION=\"${old_version}\"/FONT_VERSION=\"${new_version}\"/g" bin/docker/forge*.pe
+  sed -i "" "s/v${old_version}/v${new_version}/" README.md
 
   bin/print end-first "Bumped ${old_version} -> ${new_version}"
 }

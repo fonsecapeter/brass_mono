@@ -2,7 +2,7 @@
 
 [![Build Status, hopefully green...](https://circleci.com/gh/fonsecapeter/brass_mono.svg?style=svg)](https://app.circleci.com/pipelines/github/fonsecapeter/brass_mono)
 
-v1.100
+v1.101
 
 [Download here](https://github.com/fonsecapeter/brass_mono/releases/latest/)
 

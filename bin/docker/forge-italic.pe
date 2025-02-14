@@ -3,7 +3,7 @@
 
 Print("Forging Brass Mono Italic")
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
-FONT_VERSION="1.100";
+FONT_VERSION="1.101";
 Open("dist/forge/BrassMono-Regular.sfd");
 SelectWorthOutputting();
 Skew(13);
@@ -38,7 +38,7 @@ Close();
 
 Print("Forging Brass Mono Code Italic")
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
-FONT_VERSION="1.100";
+FONT_VERSION="1.101";
 Open("dist/forge/BrassMonoCode-Regular.sfd");
 SelectWorthOutputting();
 Skew(13);

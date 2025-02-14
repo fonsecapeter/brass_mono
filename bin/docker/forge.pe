@@ -5,7 +5,7 @@
 #   - generates bold weights
 #   - outputs sfd, ttfs for each
 
-FONT_VERSION="1.100";
+FONT_VERSION="1.101";
 Print("Forging Brass Mono v", FONT_VERSION)
 OFL_NOTICE="Copyright 2017 The Brass Mono Project Authors (github.com/fonsecapeter/brass_mono)";
 Open("src/BrassMono.svg");
