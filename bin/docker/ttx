@@ -63,7 +63,10 @@ update_table_value 'fsSelection' '00000000 10100001' "/app/dist/ttx/BrassMonoCod
 
 for ttx_font in /app/dist/ttx/*.ttx; do
   add_dsig "${ttx_font}"
-  update_table_value 'isFixedPitch' '1' "${ttx_font}"
+  if [[ "${ttx_font}" != *"Code"* ]]; then
+    echo "Setting isFixedPitch for ${ttx_font}"
+    update_table_value 'isFixedPitch' '1' "${ttx_font}"
+  fi
   # x-height is low_x ymax in any of the ttx files
   add_to_os_2_table 'sxHeight' '478' "${ttx_font}"
   # cap-height is cap_x ymax in any of the ttx files
