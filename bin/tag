@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Tag for release
+#   -> use after bin/bump
 # Based on https://googlefonts.github.io/gf-guide/requirements.html#font-versioning
-# usage: bin/tag [patch | minor | significant | major]
-#   - defaults to patch
+# usage: bin/tag
 set -e -o pipefail
 
 function get_latest_tag() {
@@ -13,50 +13,38 @@ function get_latest_tag() {
   echo "${version:-'0.000'}"
 }
 
-function needs_tag() {
+function get_current_version() {
+  local -r current_version=$( \
+    cat "bin/docker/forge.pe" \
+      | grep "FONT_VERSION=" \
+      | sed 's/FONT_VERSION=//' \
+      | sed 's/"//g' \
+      | sed 's/;//' \
+  )
+  echo "${current_version:-'0.000'}"
+}
+
+function current_tag() {
   [ git describe --contains "$(git rev-parse HEAD)" ]
 }
 
 function main() {
-  local version=$(get_latest_tag)
-  local major="${version%%.*}"; version="${version#*.}"
-  local rest="${version%%.*}"; version="${version#*.}"
-
-  # Increment
-  if [ "${1}" == 'major' ]; then
-    major=$((major+1))
-  elif [ "${1}" == 'significant' ]; then
-    rest=$((rest+100))
-  elif [ "${1}" == 'minor' ]; then
-    rest=$((rest+10))
-  elif [ "${1}" == 'patch' ]; then
-    rest=$((rest+1))
-  else
-    bin/print end-first "ERROR: unknown increment: ${1}"
+  if [ -n "$current_tag" ]; then
+    bin/print end-first "Already a tag on this commit"
     exit 1
   fi
 
-  # Create new tag
-  if [ -z "$needs_tag" ]; then
-    local -r new_version=$(printf "%s.%03d" $major $rest)
-    if [ $rest -gt 999 ]; then
-      bin/print end-first "ERROR: can't use v${new_version}"
-      exit 1
-    fi
-    if !(grep -q "FONT_VERSION=\"${new_version}\""  bin/docker/forge.pe); then
-      bin/print end-first "ERROR: update FONT_VERSION to ${new_version} in bin/docker/forge.pe"
-      exit 1
-    fi
-    if !(grep -q "FONT_VERSION=\"${new_version}\""  bin/docker/forge-italic.pe); then
-      bin/print end-first "ERROR: update FONT_VERSION to ${new_version} in bin/docker/forge-italic.pe"
-      exit 1
-    fi
-    bin/print end-first "Updating to v${new_version}"
-    git tag -a "v${new_version}" -m "Version ${new_version}"
-    git push origin "v${new_version}"
-  else
-    bin/print end-first "Already a tag on this commit"
+  local last_tagged_version=$(get_latest_tag)
+  local version=$(get_current_version)
+
+  if [ "${last_tagged_version}" == ${version} ]; then
+    bin/print end-first "ERROR: already tagged ${version}"
+    exit 1
   fi
+
+  git tag -a "v${version}" -m "Version ${version}"
+  git push origin "v${version}"
+  bin/print end-first "Tagged v${version}"
 }
 
 main $@
